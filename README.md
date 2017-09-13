@@ -20,7 +20,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Download your personal input file from http://adventofcode.com/2016/day/1/input and save it as a text file.
+
+Execute `pathfinder /path/to/input.txt`
+
+The answer will be printed out after execution.  For example:
+
+```
+> ariadne:pathfinder arnoldmi$ pathfinder /Users/arnoldmi/Desktop/input.txt 
+> 246
+
+```
 
 ## Development
 
