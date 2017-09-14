@@ -15,5 +15,17 @@ module Pathfinder
     def to_s
       "(#{@xpos}, #{@ypos})"
     end
+
+    def ==(other)
+      @xpos == other.xpos && @ypos == other.ypos
+    end
+
+    def eql?(other)
+      self == other
+    end
+
+    def hash
+      [@xpos, @ypos].hash
+    end
   end
 end
