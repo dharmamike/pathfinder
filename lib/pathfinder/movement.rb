@@ -8,29 +8,35 @@ module Pathfinder
     end
 
     def apply(current_position, last_position, previous_positions)
-      @dx = current_position.xpos - last_position.xpos
-      @dy = current_position.ypos - last_position.ypos
+      calculate_deltas(current_position, last_position)
 
       last_position.update(current_position)
-      current_position.update(new_position_from(current_position, last_position))
+      next_position = step(current_position, @distance)
+
+      until current_position == next_position || previous_positions.add?(current_position).nil? do
+        current_position.update(step(current_position))
+      end
     end
 
-    def new_position_from(current_position, last_position)
+    def calculate_deltas(current_position, last_position)
+      @dx = current_position.xpos - last_position.xpos
+      @dy = current_position.ypos - last_position.ypos
+    end
+
+    def step(current_position, blocks = 1)
       xpos = current_position.xpos
       ypos = current_position.ypos
 
-
       if @dy > 0
-        # TODO: remove this because it's same as default
-        xpos = @direction == 'R' ? xpos + @distance : xpos - @distance
+        xpos = @direction == 'R' ? xpos + blocks : xpos - blocks
       elsif @dy < 0
-        xpos = @direction == 'R' ? xpos - @distance : xpos + @distance
+        xpos = @direction == 'R' ? xpos - blocks : xpos + blocks
       elsif @dx > 0
-        ypos = @direction == 'R' ? ypos - @distance: ypos + @distance
+        ypos = @direction == 'R' ? ypos - blocks : ypos + blocks
       elsif @dx < 0
-        ypos = @direction == 'R' ? ypos + @distance : ypos - @distance
+        ypos = @direction == 'R' ? ypos + blocks : ypos - blocks
       else
-        xpos = @direction == 'R' ? xpos + @distance : xpos - @distance
+        xpos = @direction == 'R' ? xpos + blocks : xpos - blocks
       end
 
       Position.new(xpos, ypos)
