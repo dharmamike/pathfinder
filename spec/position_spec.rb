@@ -14,6 +14,7 @@ RSpec.describe Pathfinder::Position do
   it 'can determine equality' do
     expect(position1).to eq position2
     expect(position1.eql?(position2)).to be_truthy
+    expect(position1 == position2).to be_truthy
   end
 
   describe 'Set operations' do
@@ -24,6 +25,17 @@ RSpec.describe Pathfinder::Position do
       position_set.add?(position3)
       expect(position_set.count).to eq 2
       expect(position_set.add?(position2)).to be_nil
+    end
+  end
+
+  describe 'Array operations' do
+    let (:position_array) { [] }
+
+    it 'returns true when testing for inclusion' do
+      position_array << position1
+      position_array << position3
+      expect(position_array.count).to eq 2
+      expect(position_array.include?(position2)).to be_truthy
     end
   end
 end
