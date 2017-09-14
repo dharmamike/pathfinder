@@ -4,13 +4,8 @@ require 'pathfinder'
 # TODO: rely on OptionsParser?
 
 if ARGV.empty?
-  puts 'Please provide the document with directions'
+  puts 'Please provide a text document with directions'
 else
   directions = File.open(ARGV.first, &:readline)
-  directions = directions.strip.split(', ') if directions
-  if directions.empty?
-    puts 'Please provide the document with directions'
-  else
-    puts Pathfinder::find_shortest_distance(directions)
-  end
+  puts Pathfinder::find_shortest_distance(directions)
 end
