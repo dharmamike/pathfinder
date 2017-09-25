@@ -1,3 +1,5 @@
+require 'set'
+
 module Pathfinder
   class Mapper
     def initialize(start, directions)
